@@ -82,7 +82,7 @@ deleteItem = function()
 end
 
 hs.hotkey.bind({"cmd", "alt"}, "Z", function()
-    for i = 1, 3 do
-        hs.timer.doAfter(4*i, deleteItem)
+    for i = 1, 10 do
+        hs.timer.doAfter(2*i, deleteItem)
     end
 end)
