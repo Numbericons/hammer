@@ -2,74 +2,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
     hs.notify.new({title="Hammerspoon", informativeText="Hello World"}):send()
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Y", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.x = f.x - 10
-    f.y = f.y - 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.y = f.y - 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "U", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.x = f.x + 10
-    f.y = f.y - 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.x = f.x - 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.x = f.x + 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "B", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.x = f.x - 10
-    f.y = f.y + 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.y = f.y + 10
-    win:setFrame(f)
-end)
-  
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-  
-    f.x = f.x + 10
-    f.y = f.y + 10
-    win:setFrame(f)
-end)
-
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
@@ -136,10 +68,21 @@ end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
-hs.hotkey.bind({"cmd", "alt"}, "Z", function()
+keyReturn = function()
+    hs.eventtap.keyStroke({}, "return")
+end
+
+deleteItem = function()
     mp = hs.mouse.getAbsolutePosition()
     hs.eventtap.event.newMouseEvent(1, {x=mp.x, y=mp.y},{"ctrl"}):post()
-    hs.eventtap.event.newMouseEvent(1, {x=mp.x+30, y=mp.y+40}):post()
-    hs.eventtap.event.newMouseEvent(2, {x=mp.x+30, y=mp.y+40}):post()
-    -- hs.eventtap.keyStroke({}, "return")
+    hs.eventtap.event.newMouseEvent(1, {x=mp.x+30, y=mp.y+35}):post()
+    hs.eventtap.event.newMouseEvent(2, {x=mp.x+30, y=mp.y+35}):post()
+    hs.mouse.setAbsolutePosition({x=mp.x, y=mp.y})
+    hs.timer.doAfter(1, keyReturn)
+end
+
+hs.hotkey.bind({"cmd", "alt"}, "Z", function()
+    for i = 1, 3 do
+        hs.timer.doAfter(4*i, deleteItem)
+    end
 end)
