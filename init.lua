@@ -136,8 +136,10 @@ end
 myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Z", function()
+hs.hotkey.bind({"cmd", "alt"}, "Z", function()
     mp = hs.mouse.getAbsolutePosition()
     hs.eventtap.event.newMouseEvent(1, {x=mp.x, y=mp.y},{"ctrl"}):post()
-    hs.eventtap.event.newMouseEvent(1, {x=mp.x+10, y=mp.y+40}):post()
+    hs.eventtap.event.newMouseEvent(1, {x=mp.x+30, y=mp.y+40}):post()
+    hs.eventtap.event.newMouseEvent(2, {x=mp.x+30, y=mp.y+40}):post()
+    -- hs.eventtap.keyStroke({}, "return")
 end)
