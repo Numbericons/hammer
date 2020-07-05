@@ -54,6 +54,19 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
     win:setFrame(f)
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "F", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+  
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w
+    f.h = max.h
+    win:setFrame(f)
+end)
+
 function reloadConfig(files)
     doReload = false
     for _,file in pairs(files) do
@@ -81,8 +94,8 @@ deleteItem = function()
     hs.timer.doAfter(1, pressReturn)
 end
 
-hs.hotkey.bind({"cmd", "alt"}, "Z", function()
-    for i = 1, 10 do
+hs.hotkey.bind({"cmd", "alt"}, "I", function()
+    for i = 1, 5 do
         hs.timer.doAfter(2*i, deleteItem)
     end
 end)
