@@ -94,7 +94,7 @@ deleteItem = function()
     hs.timer.doAfter(1, pressReturn)
 end
 
-hs.hotkey.bind({"cmd", "alt"}, "I", function()
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "I", function()
     for i = 1, 5 do
         hs.timer.doAfter(2*i, deleteItem)
     end
