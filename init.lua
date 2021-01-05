@@ -95,7 +95,27 @@ deleteItem = function()
 end
 
 hs.hotkey.bind({"ctrl", "cmd", "alt"}, "I", function()
-    for i = 1, 20 do
-        hs.timer.doAfter(2*i, deleteItem)
+    for i = 1, 50 do
+        hs.timer.doAfter(3*i, deleteItem)
     end
+end)
+
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "X", function()
+    hs.eventtap.keyStrokes('&xml=t')
+end)
+
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "Z", function()
+    hs.eventtap.keyStrokes('console.log(\'Script Finished\');')
+end)
+
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "F", function()
+    hs.eventtap.keyStrokes('for (let i=0; i<arr.length; i++){}')
+end)
+
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "J", function()
+    hs.eventtap.keyStrokes('for (let j=0; j<arr.length; j++){}')
+end)
+
+hs.hotkey.bind({"ctrl", "cmd", "alt"}, "M", function()
+    hs.eventtap.keyStrokes('arr.map(el => el)')
 end)
